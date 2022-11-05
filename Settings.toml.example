@@ -1,0 +1,12 @@
+api_url = "172.16.2.4:5038"
+api_user = "username"
+api_pass = "password"
+api_sms_send_span = 2
+log_level = "Debug"
+retry_wait_s = 10
+rabbit_url = "amqp://guest:guest@172.16.2.2:5672"
+rabbit_exchange = "tg.sms"
+rabbit_sms_routing_key = "sms_receive"
+rabbit_command_routing_key = "sms_command"
+rabbit_consumer_tag = "tg_consumer"
+rabbit_consumer_queue = "sms_send"
