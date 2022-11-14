@@ -1,7 +1,7 @@
 # Yeastar TG GSM Gateway to RabbitMQ
 
 ## Intro
-This program relays messages between Yeastar TG series and a RabbitMQ server. RabbitMQ is much saner API for when you need to read received messages, since the only native API TG provides to read received messages is a raw telnet socket. Since we need to connect to the socket anyway, SMS send functionality is provided as well.
+This program relays messages between Yeastar TG series and a RabbitMQ server. RabbitMQ is much saner API for when you need to read received messages, since the only native API TG provides to read received messages is a raw telnet socket providing a subset of Asterisk Call Manager AMI commands. Since we need to connect to the socket anyway, SMS send functionality is provided as well.
 
 ## Detail
 ### Receiving SMS
@@ -47,7 +47,9 @@ Program listens as a RabbitMQ consumer on a specified queue and waits for json m
 - id - can be set to any number or 1-word text, it will be used in the reply on the confirmation queue.
 
 ## Build
-Just use ```cargo build```. No binary distribution is provided for now
+Just use ```cargo build```. No binary distribution is provided for now.
+
+Minimum supported rustc version is 1.65.0
 
 ## Setup
 ```cp Settings.toml.example Settings.toml``` and edit the file
@@ -73,17 +75,22 @@ RabbitMQ options:
 You also need to have RabbitMQ server running. Default options are fine, but make sure your queues are properly bound to routing keys.
 
 ## Todo
+Next steps:
+1. Finish refactoring
+2. Split AMQP into separate consumer and producer module
+
 In no particular order:
 - Allow sending and receiving USSD
 - Better reconnection handling, reconnect to TG or RabbitMQ after disconnect
 - Keep received messages in memory while TG thread is running but RabbitMQ is not live
 - provide Dockerfile or systemd service files
+- Separate TgClient into its own crate for reuse in different projects (maybe provide more AMI functionality)
 
 ## Reference
 Vendor API description:
 - https://support.yeastar.com/hc/en-us/articles/217392758-How-to-Use-TG-SMS-API
 - https://support.yeastar.com/hc/en-us/articles/900005386406-How-To-Use-TG-SMS-HTTP-API-Video-
 
-The project was tested on TG400, but should run with all current lineup - TG100, TG200, TG400, TG800 and TG1600
+The project was tested on TG400, but should run with all current lineup - TG100, TG200, TG400, TG800 and TG1600 , as well as other repackaged Asterisk boxes (as long as AMI is exposed)
 
 If you find this useful, I am open to feedback or pull requests
