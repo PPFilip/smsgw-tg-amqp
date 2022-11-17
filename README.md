@@ -75,10 +75,6 @@ RabbitMQ options:
 You also need to have RabbitMQ server running. Default options are fine, but make sure your queues are properly bound to routing keys.
 
 ## Todo
-Next steps:
-1. Finish refactoring
-2. Split AMQP into separate consumer and producer module
-
 In no particular order:
 - Allow sending and receiving USSD
 - Better reconnection handling, reconnect to TG or RabbitMQ after disconnect
