@@ -301,7 +301,7 @@ fn parse_reply(str: String) -> Result<(String, String), (String, String)> {
             Some(c) => {
                 let resp = c.name("command").sane_default();
                 let privilege = c.name("privilege").sane_default();
-                debug!("[TG] Response for '{}':\n{}", privilege, resp);
+                trace!("[TG] Response for '{}':\n{}", privilege, resp);
                 Ok((String::from("response"), resp))
             },
             None => {
